@@ -38,14 +38,12 @@ public class TestRoleModel {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
 	public static void testDelete() {
 
 		RoleBean bean = new RoleBean();
 		bean.setId(1);
-		
+
 		RoleModel model = new RoleModel();
 
 		try {
@@ -55,22 +53,26 @@ public class TestRoleModel {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	public static void testUpdate()  {
-		
+
+	public static void testUpdate() {
+
 		RoleBean bean = new RoleBean();
-		 bean.setName("hr");
-		 bean.setId(2);
-		 
-		 RoleModel model = new RoleModel();
-		 try {
+		bean.setName("developer");
+		bean.setDescription("hr");
+		bean.setCreatedBy("admin");
+		bean.setModifiedBy("admin");
+		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
+		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
+		bean.setId(1);
+
+		RoleModel model = new RoleModel();
+		try {
 			model.update(bean);
 		} catch (ApplicationException e) {
-			
+
 			e.printStackTrace();
 		}
 		System.out.println("Record update successfully");
-		}
+	}
 
 }
