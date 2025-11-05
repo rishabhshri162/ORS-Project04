@@ -180,7 +180,9 @@ public class RoleModel {
 		return bean;
 
 	}
-	
+
+	// Find by name method
+
 	public RoleBean findByName(String name) throws ApplicationException {
 
 		RoleBean bean = null;
@@ -212,6 +214,9 @@ public class RoleModel {
 			JDBCDataSource.closeConnection(conn);
 		}
 		return bean;
-	
+
 	}
+	
+	
+	//search method
 }
