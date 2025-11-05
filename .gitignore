@@ -18,6 +18,7 @@ hs_err_pid*
 
 # Logs
 *.log
+*.tmp
 
 # OS files
 .DS_Store

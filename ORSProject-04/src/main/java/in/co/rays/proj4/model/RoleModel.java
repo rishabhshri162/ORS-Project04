@@ -12,6 +12,7 @@ import javax.naming.directory.SearchControls;
 import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DatabaseException;
+import in.co.rays.proj4.exception.DuplicateRecordException;
 import in.co.rays.proj4.util.JDBCDataSource;
 
 public class RoleModel {
@@ -49,11 +50,17 @@ public class RoleModel {
 
 	// Add Method
 
-	public long add(RoleBean bean) throws ApplicationException {
+	public long add(RoleBean bean) throws ApplicationException, DuplicateRecordException {
 
 		Connection conn = null;
 
 		int pk = 0;
+		
+		RoleBean existBean = findByName(bean.getName());
+
+		if (existBean != null) {
+			throw new DuplicateRecordException("Role already exists");
+		}
 
 		try {
 			pk = nextPk();
@@ -117,9 +124,16 @@ public class RoleModel {
 
 	// Update Method
 
-	public void update(RoleBean bean) throws ApplicationException {
+	public void update(RoleBean bean) throws ApplicationException, DuplicateRecordException {
 
 		Connection conn = null;
+		
+		RoleBean existBean = findByName(bean.getName());
+
+		if (existBean != null && existBean.getId() != bean.getId()) {
+			throw new DuplicateRecordException("Role already exists");
+		}
+
 
 		try {
 			conn = JDBCDataSource.getConnection();

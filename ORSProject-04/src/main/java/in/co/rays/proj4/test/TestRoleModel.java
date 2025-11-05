@@ -9,6 +9,7 @@ import java.util.List;
 import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DatabaseException;
+import in.co.rays.proj4.exception.DuplicateRecordException;
 import in.co.rays.proj4.model.RoleModel;
 
 public class TestRoleModel {
@@ -16,7 +17,7 @@ public class TestRoleModel {
 
 //		RoleModel model = new RoleModel();
 //		System.out.println(model.nextPk());
-//		testAdd();
+		testAdd();
 //		testDelete();
 //		testUpdate();
 //		testFindByPk();
@@ -28,10 +29,10 @@ public class TestRoleModel {
 	public static void testAdd() {
 
 		RoleBean bean = new RoleBean();
-		bean.setName("hr");
-		bean.setDescription("hr");
-		bean.setCreatedBy("admin");
-		bean.setModifiedBy("admin");
+		bean.setName("kiosk");
+		bean.setDescription("kiosk");
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 
@@ -40,7 +41,7 @@ public class TestRoleModel {
 		try {
 			model.add(bean);
 			System.out.println("Role Added Successfully");
-		} catch (ApplicationException e) {
+		} catch (ApplicationException | DuplicateRecordException e) {
 			e.printStackTrace();
 		}
 	}
@@ -63,10 +64,10 @@ public class TestRoleModel {
 	public static void testUpdate() {
 
 		RoleBean bean = new RoleBean();
-		bean.setName("account");
-		bean.setDescription("hr");
-		bean.setCreatedBy("admin");
-		bean.setModifiedBy("admin");
+		bean.setName("Admin");
+		bean.setDescription("Admin");
+		bean.setCreatedBy("Admin");
+		bean.setModifiedBy("Admin");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
 		bean.setId(2);
@@ -74,7 +75,7 @@ public class TestRoleModel {
 		RoleModel model = new RoleModel();
 		try {
 			model.update(bean);
-		} catch (ApplicationException e) {
+		} catch (ApplicationException | DuplicateRecordException e) {
 
 			e.printStackTrace();
 		}
