@@ -19,13 +19,13 @@ import in.co.rays.proj4.model.UserModel;
 public class TestUserModel {
 	public static void main(String[] args) throws DatabaseException, ParseException {
 
-//            testAdd();	
+            testAdd();	
 //		testDelete();
 //		testUpdate();
 //		testFindByPk();
 //		testFindByLogin();
 //		testSearch();
-		testAuthenticate();
+//		testAuthenticate();
 
 	}
 
@@ -34,9 +34,9 @@ public class TestUserModel {
 
 		UserBean bean = new UserBean();
 
-		bean.setFirstName("abh");
-		bean.setLastName("Sstava");
-		bean.setLogin("hs@gmail.com");
+		bean.setFirstName("Rishabh");
+		bean.setLastName("Shrivastava");
+		bean.setLogin("rs@gmail.com");
 		bean.setPassword("123");
 		try {
 			bean.setDob(sdf.parse("2002-06-01"));
@@ -81,9 +81,9 @@ public class TestUserModel {
 
 		UserBean bean = new UserBean();
 		bean.setId(1);
-		bean.setFirstName("Rishabh");
+		bean.setFirstName("Ram");
 		bean.setLastName("Shrivastava");
-		bean.setLogin("rs@gmail.com");
+		bean.setLogin("hs@gmail.com");
 		bean.setPassword("123");
 		try {
 			bean.setDob(sdf.parse("2002-06-01"));
@@ -102,11 +102,11 @@ public class TestUserModel {
 		UserModel model = new UserModel();
 		try {
 			model.update(bean);
+			System.out.println("Record update successfully");
 		} catch (ApplicationException | DuplicateRecordException e) {
 
 			e.printStackTrace();
 		}
-		System.out.println("Record update successfully");
 	}
 
 	public static void testFindByPk() {

@@ -14,6 +14,7 @@ public class UserBean extends BaseBean{
 	private long roleId;
 	private String gender;
 	
+	
 	public String getFirstName() {
 		return firstName;
 	}
