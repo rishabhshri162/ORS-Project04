@@ -27,7 +27,7 @@ public class TestCollegeModel {
 //
 //	testAdd();
 //		testDelete();
-		testUpdate();
+//		testUpdate();
 //		testFindByPk();
 //		testFindByName();
 //		testSearch();

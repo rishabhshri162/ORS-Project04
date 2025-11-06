@@ -1,13 +1,13 @@
 package in.co.rays.proj4.bean;
 
-public class MarksheetBean {
+public class MarksheetBean extends BaseBean{
 	
 	private String rollNo;
 	private long studentId;
 	private String name;
-	private int physics;
-	private int chemistry;
-	private int maths;
+	private Integer physics;
+	private Integer chemistry;
+	private Integer maths;
 	
 	public String getRollNo() {
 		return rollNo;
@@ -27,22 +27,22 @@ public class MarksheetBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPhysics() {
+	public Integer getPhysics() {
 		return physics;
 	}
-	public void setPhysics(int physics) {
+	public void setPhysics(Integer physics) {
 		this.physics = physics;
 	}
-	public int getChemistry() {
+	public Integer getChemistry() {
 		return chemistry;
 	}
-	public void setChemistry(int chemistry) {
+	public void setChemistry(Integer chemistry) {
 		this.chemistry = chemistry;
 	}
-	public int getMaths() {
+	public Integer getMaths() {
 		return maths;
 	}
-	public void setMaths(int maths) {
+	public void setMaths(Integer maths) {
 		this.maths = maths;
 	}
 
