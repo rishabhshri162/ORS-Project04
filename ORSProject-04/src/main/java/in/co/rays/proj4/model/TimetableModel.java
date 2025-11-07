@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import in.co.rays.proj4.bean.CourseBean;
+import in.co.rays.proj4.bean.FacultyBean;
 import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.bean.SubjectBean;
 import in.co.rays.proj4.bean.TimetableBean;
@@ -242,6 +243,8 @@ public class TimetableModel {
 		return bean;
 	}
 
+	// check by subject name
+
 	public TimetableBean checkBySubjectName(Long courseId, Long subjectId, Date examDate) throws ApplicationException {
 		StringBuffer sql = new StringBuffer(
 				"select * from st_timetable where course_id = ? and subject_id = ? and exam_date = ?");
@@ -282,6 +285,8 @@ public class TimetableModel {
 		}
 		return bean;
 	}
+
+	// check by semester name
 
 	public TimetableBean checkBySemester(Long courseId, Long subjectId, String semester, Date examDate)
 			throws ApplicationException {
@@ -324,6 +329,8 @@ public class TimetableModel {
 		}
 		return bean;
 	}
+
+	// check by exam time
 
 	public TimetableBean checkByExamTime(Long courseId, Long subjectId, String semester, Date examDate, String examTime,
 			String description) throws ApplicationException {
@@ -368,6 +375,14 @@ public class TimetableModel {
 		}
 		return bean;
 	}
+
+	// list method
+
+	public List<TimetableBean> list() throws ApplicationException {
+		return search(null, 0, 0);
+	}
+
+	// search method
 
 	public List<TimetableBean> search(TimetableBean bean, int pageNo, int pageSize) throws ApplicationException {
 		StringBuffer sql = new StringBuffer("select * from st_timetable where 1=1");

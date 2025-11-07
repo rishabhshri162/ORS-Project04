@@ -125,8 +125,8 @@ public class FacultyModel {
 		SubjectBean subjectBean = subjectModel.findByPk(bean.getSubjectId());
 		bean.setSubjectName(subjectBean.getName());
 
-		FacultyBean beanExist = findByEmail(bean.getEmail());
-		if (beanExist != null && !(beanExist.getId() == bean.getId())) {
+		FacultyBean existbean = findByEmail(bean.getEmail());
+		if (existbean != null && (existbean.getId() != bean.getId())) {
 			throw new DuplicateRecordException("EmailId is already exist");
 		}
 		try {
@@ -240,7 +240,7 @@ public class FacultyModel {
 		StringBuffer sql = new StringBuffer("select * from st_faculty where email = ?");
 		FacultyBean bean = null;
 		Connection conn = null;
-		System.out.println("sql" + sql);
+//		System.out.println("sql" + sql);
 
 		try {
 			conn = JDBCDataSource.getConnection();
