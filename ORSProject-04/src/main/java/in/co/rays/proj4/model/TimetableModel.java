@@ -56,8 +56,8 @@ public class TimetableModel {
 		bean.setSubjectName(subjectBean.getName());
 
 		try {
-			conn = JDBCDataSource.getConnection();
 			pk = nextPk();
+			conn = JDBCDataSource.getConnection();
 			conn.setAutoCommit(false); // Begin transaction
 			PreparedStatement pstmt = conn
 					.prepareStatement("insert into st_timetable values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
