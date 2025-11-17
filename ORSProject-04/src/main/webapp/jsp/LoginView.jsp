@@ -23,14 +23,14 @@
 				<tr>
 					<th>Login Id:</th>
 					<td><input type="text" name="login"
-					value="<%=DataUtility.getStringData(bean.getLogin()) %>"></td>
+						value="<%=DataUtility.getStringData(bean.getLogin())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("login", request)%></font></td>
 
 				</tr>
 				<tr>
 					<th>password</th>
 					<td><input type="text" name="password"
-					value="<%=DataUtility.getStringData(bean.getPassword()) %>"></td>
+						value="<%=DataUtility.getStringData(bean.getPassword())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("password", request)%></font></td>
 				</tr>
 
@@ -38,7 +38,8 @@
 					<th></th>
 
 					<td><input type="submit" name="operation"
-						value="<%=LoginCtl.OP_SIGN_IN%>"></td>
+						value="<%=LoginCtl.OP_SIGN_IN%>"> <input type="submit"
+						name="operation" value="<%=LoginCtl.OP_SIGN_UP%>"></td>
 
 				</tr>
 

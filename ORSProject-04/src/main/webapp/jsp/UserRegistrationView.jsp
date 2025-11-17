@@ -23,6 +23,17 @@
 
 		<div align="center">
 			<h1>User Registration</h1>
+
+			<div style="height: 15px; margin-bottom: 12px">
+				<H3 align="center">
+					<font color="green"> <%=ServletUtility.getSuccessMessage(request)%>
+					</font>
+				</H3>
+				<H3 align="center">
+					<font color="red"> <%=ServletUtility.getErrorMessage(request)%>
+					</font>
+				</H3>
+			</div>
 			<table>
 				<tr>
 					<th>First Name:</th>
@@ -59,7 +70,8 @@
 				</tr>
 				<tr>
 					<th>DOB:</th>
-					<td><input type="date" name="dob" style="width: 98%"></td>
+					<td><input type="date" name="dob" style="width: 98%"
+						value="<%=DataUtility.getDateString(bean.getDob())%>"></td>
 
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("dob", request)%></font></td>
 				</tr>
@@ -70,7 +82,7 @@
 							HashMap map = new HashMap();
 							map.put("male", "male");
 							map.put("female", "female");
-						%> <%=HTMLUtility.getList("gender", "", map)%>
+						%> <%=HTMLUtility.getList("gender", DataUtility.getStringData(bean.getGender()), map)%>
 					</td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("gender", request)%></font></td>
 				</tr>
@@ -84,7 +96,14 @@
 				<tr>
 					<td></td>
 					<td><input type="submit" name="operation"
-						value="<%=UserRegistrationCtl.OP_SIGN_UP%>"></td>
+						value="<%=UserRegistrationCtl.OP_SIGN_UP%>">
+						
+						<input type="submit" name="operation"
+						value="<%=UserRegistrationCtl.OP_RESET%>">
+						
+						
+						
+						</td>
 				</tr>
 			</table>
 		</div>
