@@ -28,7 +28,7 @@
 
 				</tr>
 				<tr>
-					<th>password</th>
+					<th>Password:</th>
 					<td><input type="text" name="password"
 						value="<%=DataUtility.getStringData(bean.getPassword())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("password", request)%></font></td>

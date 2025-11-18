@@ -139,7 +139,7 @@ public class UserRegistrationCtl extends BaseCtl {
 			try {
 				long pk = model.add(bean);
 				ServletUtility.setBean(bean, request);
-				ServletUtility.setSuccessMessage("Registration successful!", request);
+				ServletUtility.setSuccessMessage("Registration successfull!", request);
 			} catch (DuplicateRecordException e) {
 				ServletUtility.setBean(bean, request);
 				ServletUtility.setErrorMessage("Login id already exists", request);
