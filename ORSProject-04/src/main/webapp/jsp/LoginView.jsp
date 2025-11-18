@@ -1,7 +1,10 @@
 <%@page import="in.co.rays.proj4.util.DataUtility"%>
-<%@page import="in.co.rays.proj4.util.DataValidator"%>
 <%@page import="in.co.rays.proj4.util.ServletUtility"%>
 <%@page import="in.co.rays.proj4.controller.LoginCtl"%>
+<%@page import="in.co.rays.proj4.controller.UserRegistrationCtl"%>
+<%@page import="in.co.rays.proj4.util.HTMLUtility"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="in.co.rays.proj4.controller.ORSView"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -14,18 +17,30 @@
 <body>
 	<%@ include file="Header.jsp"%>
 	<form action="<%=ORSView.LOGIN_CTL%>" method="post">
+
 		<jsp:useBean id="bean" class="in.co.rays.proj4.bean.UserBean"
 			scope="request"></jsp:useBean>
+
 		<div align="center">
 			<h1>Login</h1>
-
+			
+			<div style="height: 15px; margin-bottom: 12px">
+				<H3 align="center">
+					<font color="green"> <%=ServletUtility.getSuccessMessage(request)%>
+					</font>
+				</H3>
+				<H3 align="center">
+					<font color="red"> <%=ServletUtility.getErrorMessage(request)%>
+					</font>
+				</H3>
+			</div>
+			
 			<table>
 				<tr>
-					<th>Login Id:</th>
+					<th>Login ID:</th>
 					<td><input type="text" name="login"
 						value="<%=DataUtility.getStringData(bean.getLogin())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("login", request)%></font></td>
-
 				</tr>
 				<tr>
 					<th>Password:</th>
@@ -33,17 +48,12 @@
 						value="<%=DataUtility.getStringData(bean.getPassword())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("password", request)%></font></td>
 				</tr>
-
 				<tr>
-					<th></th>
-
+					<td></td>
 					<td><input type="submit" name="operation"
 						value="<%=LoginCtl.OP_SIGN_IN%>"> <input type="submit"
 						name="operation" value="<%=LoginCtl.OP_SIGN_UP%>"></td>
-
 				</tr>
-
-
 			</table>
 		</div>
 	</form>
