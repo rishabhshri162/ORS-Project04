@@ -54,7 +54,7 @@
 	<b>|</b>
 	<a href=<%=ORSView.FACULTY_LIST_CTL%>><b>Faculty List</b></a>
 	<b>|</b>
-	<a href="#"><b>Add Timetable</b></a>
+	<a href=<%=ORSView.TIMETABLE_CTL%>><b>Add Timetable</b></a>
 	<b>|</b>
 	<a href=<%=ORSView.TIMETABLE_LIST_CTL%>><b>Timetable List</b></a>
 	<b>|</b>
