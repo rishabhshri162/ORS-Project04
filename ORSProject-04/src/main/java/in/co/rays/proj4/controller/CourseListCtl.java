@@ -79,19 +79,64 @@ public class CourseListCtl extends BaseCtl {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		List list = null;
+		List next = null;
 
-		int pageNo = 1;
-		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
+		int pageNo = DataUtility.getInt(request.getParameter("pageNo"));
+		int pageSize = DataUtility.getInt(request.getParameter("pageSize"));
+
+		pageNo = (pageNo == 0) ? 1 : pageNo;
+		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
 
 		CourseBean bean = (CourseBean) populateBean(request);
 		CourseModel model = new CourseModel();
 
-		try {
-			List<CourseBean> list = model.search(bean, pageNo, pageSize);
-			List<CourseBean> next = model.search(bean, pageNo + 1, pageSize);
+		String op = DataUtility.getString(request.getParameter("operation"));
+		String[] ids = request.getParameterValues("ids");
 
-			if (list == null || list.isEmpty()) {
-				ServletUtility.setErrorMessage("No record found", request);
+		try {
+
+			if (OP_SEARCH.equalsIgnoreCase(op) || "Next".equalsIgnoreCase(op) || "Previous".equalsIgnoreCase(op)) {
+
+				if (OP_SEARCH.equalsIgnoreCase(op)) {
+					pageNo = 1;
+				} else if (OP_NEXT.equalsIgnoreCase(op)) {
+					pageNo++;
+				} else if (OP_PREVIOUS.equalsIgnoreCase(op) && pageNo > 1) {
+					pageNo--;
+				}
+
+			} else if (OP_NEW.equalsIgnoreCase(op)) {
+				ServletUtility.redirect(ORSView.COURSE_CTL, request, response);
+				return;
+
+			} else if (OP_DELETE.equalsIgnoreCase(op)) {
+				pageNo = 1;
+				if (ids != null && ids.length > 0) {
+					CourseBean deletebean = new CourseBean();
+					for (String id : ids) {
+						deletebean.setId(DataUtility.getInt(id));
+						model.delete(deletebean);
+						ServletUtility.setSuccessMessage("Course deleted successfully", request);
+					}
+				} else {
+					ServletUtility.setErrorMessage("Select at least one record", request);
+				}
+
+			} else if (OP_RESET.equalsIgnoreCase(op)) {
+				ServletUtility.redirect(ORSView.COURSE_LIST_CTL, request, response);
+				return;
+
+			} else if (OP_BACK.equalsIgnoreCase(op)) {
+				ServletUtility.redirect(ORSView.COURSE_LIST_CTL, request, response);
+				return;
+			}
+
+			list = model.search(bean, pageNo, pageSize);
+			next = model.search(bean, pageNo + 1, pageSize);
+
+			if (list == null || list.size() == 0) {
+				ServletUtility.setErrorMessage("No record found ", request);
 			}
 
 			ServletUtility.setList(list, request);
@@ -107,7 +152,6 @@ public class CourseListCtl extends BaseCtl {
 			return;
 		}
 	}
-
 
 	@Override
 	protected String getView() {
