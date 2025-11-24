@@ -57,7 +57,20 @@ public class RoleCtl extends BaseCtl {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
+		long id = DataUtility.getLong(request.getParameter("id"));
+
+		RoleModel model = new RoleModel();
+
+		if (id > 0) {
+			try {
+				RoleBean bean = model.findByPk(id);
+				ServletUtility.setBean(bean, request);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				return;
+			}
+		}
 		ServletUtility.forward(getView(), request, response);
 	}
 
@@ -67,6 +80,8 @@ public class RoleCtl extends BaseCtl {
 		String op = DataUtility.getString(request.getParameter("operation"));
 
 		RoleModel model = new RoleModel();
+
+		long id = DataUtility.getLong(request.getParameter("id"));
 
 		if (OP_SAVE.equalsIgnoreCase(op)) {
 
@@ -83,7 +98,27 @@ public class RoleCtl extends BaseCtl {
 				e.printStackTrace();
 				return;
 			}
-		
+		} else if (OP_UPDATE.equalsIgnoreCase(op)) {
+
+			RoleBean bean = (RoleBean) populateBean(request);
+
+			try {
+				if (id > 0) {
+					model.update(bean);
+				}
+				ServletUtility.setBean(bean, request);
+				ServletUtility.setSuccessMessage("Role is successfully updated", request);
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setBean(bean, request);
+				ServletUtility.setErrorMessage("Role already exists", request);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				return;
+			}
+
+		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.ROLE_LIST_CTL, request, response);
+			return;
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
 			ServletUtility.redirect(ORSView.ROLE_CTL, request, response);
 			return;

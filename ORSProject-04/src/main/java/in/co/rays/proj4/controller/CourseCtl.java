@@ -64,6 +64,19 @@ public class CourseCtl extends BaseCtl {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		long id = DataUtility.getLong(request.getParameter("id"));
+
+		CourseModel model = new CourseModel();
+
+		if (id > 0) {
+			try {
+				CourseBean bean = model.findByPk(id);
+				ServletUtility.setBean(bean, request);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				return;
+			}
+		}
 		ServletUtility.forward(getView(), request, response);
 	}
 
@@ -89,6 +102,24 @@ public class CourseCtl extends BaseCtl {
 				e.printStackTrace();
 				return;
 			}
+		} else if (OP_UPDATE.equalsIgnoreCase(op)) {
+			CourseBean bean = (CourseBean) populateBean(request);
+			try {
+				if (id > 0) {
+					model.update(bean);
+				}
+				ServletUtility.setBean(bean, request);
+				ServletUtility.setSuccessMessage("Course updated successfully", request);
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setBean(bean, request);
+				ServletUtility.setErrorMessage("Course already exists", request);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				return;
+			}
+		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.COURSE_LIST_CTL, request, response);
+			return;
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
 			ServletUtility.redirect(ORSView.COURSE_CTL, request, response);
 			return;

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.proj4.bean.BaseBean;
+import in.co.rays.proj4.bean.MarksheetBean;
 import in.co.rays.proj4.bean.SubjectBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
@@ -74,6 +75,21 @@ public class SubjectCtl extends BaseCtl {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		long id = DataUtility.getLong(request.getParameter("id"));
+
+		SubjectModel model = new SubjectModel();
+
+		if (id > 0) {
+			try {
+				SubjectBean bean = model.findByPk(id);
+				ServletUtility.setBean(bean, request);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				return;
+			}
+
+		}
+
 		ServletUtility.forward(getView(), request, response);
 	}
 
@@ -94,18 +110,36 @@ public class SubjectCtl extends BaseCtl {
 				ServletUtility.setSuccessMessage("Subject added successfully", request);
 			} catch (DuplicateRecordException e) {
 				ServletUtility.setBean(bean, request);
-				ServletUtility.setErrorMessage("Subject Name already exists", request);
+				ServletUtility.setErrorMessage("Subject already exists", request);
 			} catch (ApplicationException e) {
 				e.printStackTrace();
 				return;
 			}
-
+		} else if (OP_UPDATE.equalsIgnoreCase(op)) {
+			SubjectBean bean = (SubjectBean) populateBean(request);
+			try {
+				if (id > 0) {
+					model.update(bean);
+				}
+				ServletUtility.setBean(bean, request);
+				ServletUtility.setSuccessMessage("Subject updated successfully", request);
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setBean(bean, request);
+				ServletUtility.setErrorMessage("Subject already exists", request);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				return;
+			}
+		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.SUBJECT_LIST_CTL, request, response);
+			return;
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
 			ServletUtility.redirect(ORSView.SUBJECT_CTL, request, response);
 			return;
 		}
 		ServletUtility.forward(getView(), request, response);
 	}
+
 
 	@Override
 	protected String getView() {
