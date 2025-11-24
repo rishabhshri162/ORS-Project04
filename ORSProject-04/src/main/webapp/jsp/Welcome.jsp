@@ -1,4 +1,6 @@
 <%@page import="in.co.rays.proj4.controller.ORSView"%>
+<%@page import="in.co.rays.proj4.bean.UserBean"%>
+<%@page import="in.co.rays.proj4.bean.RoleBean"%>
 <html>
 <head>
 <title>Welcome to ORS</title>
@@ -12,6 +14,25 @@
 		<h1 align="center">
 			<font size="10px" color="navy">Welcome to ORS</font>
 		</h1>
+
+		<%
+			UserBean bean = (UserBean) session.getAttribute("user");
+			if (bean != null) {
+				if (bean.getRoleId() == RoleBean.STUDENT) {
+		%>
+
+		
+		<h2 align="Center">
+			<a style="color: maroon" href="<%=ORSView.GET_MARKSHEET_CTL%>">Click here to see your
+				Marksheet </a>
+		</h2>
+
+
+		<%
+			}
+			}
+		%>
+
 	</form>
 </body>
 </html>
