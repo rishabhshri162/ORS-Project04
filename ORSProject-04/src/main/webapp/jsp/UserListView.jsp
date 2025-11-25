@@ -98,7 +98,7 @@
 				%>
 
 				<tr>
-					<td style="text-align: center;"><input type="checkbox"
+					<td style="text-align: center;"><input type="checkbox" 
 						 name="ids" value="<%=bean.getId()%>"
 						<%=(user.getId() == bean.getId() || bean.getRoleId() == RoleBean.ADMIN) ? "disabled" : ""%>>
 					</td>
