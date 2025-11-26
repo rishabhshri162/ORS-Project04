@@ -98,8 +98,8 @@
 				%>
 
 				<tr>
-					<td style="text-align: center;"><input type="checkbox" 
-						 name="ids" value="<%=bean.getId()%>"
+					<td style="text-align: center;">
+					<input type="checkbox" name="ids" class="case" value="<%=bean.getId()%>"
 						<%=(user.getId() == bean.getId() || bean.getRoleId() == RoleBean.ADMIN) ? "disabled" : ""%>>
 					</td>
 					<td style="text-align: center;"><%=index++%></td>
@@ -125,13 +125,12 @@
 
 			<table style="width: 100%">
 				<tr>
-					<td style="width: 25%"><input type="submit" name="operation"
-						value="<%=UserListCtl.OP_PREVIOUS%>"
-						<%=pageNo > 1 ? "" : "disabled"%>></td>
+					<td style="width: 25%">
+					<input type="submit" name="operation" value="<%=UserListCtl.OP_PREVIOUS%>"<%=pageNo > 1 ? "" : "disabled"%>></td>
 					<td align="center" style="width: 25%"><input type="submit"
 						name="operation" value="<%=UserListCtl.OP_NEW%>"></td>
-					<td align="center" style="width: 25%"><input type="submit"
-						name="operation" value="<%=UserListCtl.OP_DELETE%>"></td>
+					<td align="center" style="width: 25%">
+					<input type="submit" name="operation" value="<%=UserListCtl.OP_DELETE%>"></td>
 					<td style="width: 25%" align="right"><input type="submit"
 						name="operation" value="<%=UserListCtl.OP_NEXT%>"
 						<%=nextListSize != 0 ? "" : "disabled"%>></td>
