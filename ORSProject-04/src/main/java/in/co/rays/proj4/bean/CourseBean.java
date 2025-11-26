@@ -1,42 +1,63 @@
 package in.co.rays.proj4.bean;
 
+/**
+ * CourseBean represents a course entity in the system.
+ * It holds information such as course name, duration, 
+ * and description. This bean is used for transferring
+ * course-related data between layers.
+ *
+ * Author: Rishabh Shrivastava
+ */
 public class CourseBean extends BaseBean {
 
-	private String name;
-	private String duration;
-	private String description;
+    /** Course Name */
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    /** Duration of the Course */
+    private String duration;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /** Description of the Course */
+    private String description;
 
-	public String getDuration() {
-		return duration;
-	}
+    /** Returns course name */
+    public String getName() {
+        return name;
+    }
 
-	public void setDuration(String duration) {
-		this.duration = duration;
-	}
+    /** Sets course name */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    /** Returns course duration */
+    public String getDuration() {
+        return duration;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    /** Sets course duration */
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
 
-	@Override
-	public String getKey() {
-		return id + "";
-	}
+    /** Returns course description */
+    public String getDescription() {
+        return description;
+    }
 
-	@Override
-	public String getValue() {
-		return name;
-	}
+    /** Sets course description */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /** Returns key for dropdown lists */
+    @Override
+    public String getKey() {
+        return id + "";
+    }
+
+    /** Returns value for dropdown lists */
+    @Override
+    public String getValue() {
+        return name;
+    }
 }

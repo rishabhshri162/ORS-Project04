@@ -2,52 +2,79 @@ package in.co.rays.proj4.bean;
 
 import java.sql.Timestamp;
 
+/**
+ * BaseBean is the superclass for all beans in the project.
+ * It provides common audit fields like id, createdBy, modifiedBy,
+ * and timestamps for creation and modification.
+ *
+ * @author  
+ *         Rishabh Shrivastava
+ * @version 1.0
+ */
 public abstract class BaseBean implements DropdownListBean {
 
-	protected long id;
-	protected String createdBy;
-	protected String modifiedBy;
-	protected Timestamp createdDatetime;
-	protected Timestamp modifiedDatetime;
+    /** Primary Key */
+    protected long id;
 
-	public long getId() {
-		return id;
-	}
+    /** Created By User */
+    protected String createdBy;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    /** Modified By User */
+    protected String modifiedBy;
 
-	public String getCreatedBy() {
-		return createdBy;
-	}
+    /** Timestamp when record was created */
+    protected Timestamp createdDatetime;
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
+    /** Timestamp when record was last modified */
+    protected Timestamp modifiedDatetime;
 
-	public String getModifiedBy() {
-		return modifiedBy;
-	}
+    /** Returns primary key */
+    public long getId() {
+        return id;
+    }
 
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
-	}
+    /** Sets primary key */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public Timestamp getCreatedDatetime() {
-		return createdDatetime;
-	}
+    /** Returns created-by username */
+    public String getCreatedBy() {
+        return createdBy;
+    }
 
-	public void setCreatedDatetime(Timestamp createdDatetime) {
-		this.createdDatetime = createdDatetime;
-	}
+    /** Sets created-by username */
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
 
-	public Timestamp getModifiedDatetime() {
-		return modifiedDatetime;
-	}
+    /** Returns modified-by username */
+    public String getModifiedBy() {
+        return modifiedBy;
+    }
 
-	public void setModifiedDatetime(Timestamp modifiedDatetime) {
-		this.modifiedDatetime = modifiedDatetime;
-	}
+    /** Sets modified-by username */
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
 
+    /** Returns creation timestamp */
+    public Timestamp getCreatedDatetime() {
+        return createdDatetime;
+    }
+
+    /** Sets creation timestamp */
+    public void setCreatedDatetime(Timestamp createdDatetime) {
+        this.createdDatetime = createdDatetime;
+    }
+
+    /** Returns last modified timestamp */
+    public Timestamp getModifiedDatetime() {
+        return modifiedDatetime;
+    }
+
+    /** Sets last modified timestamp */
+    public void setModifiedDatetime(Timestamp modifiedDatetime) {
+        this.modifiedDatetime = modifiedDatetime;
+    }
 }

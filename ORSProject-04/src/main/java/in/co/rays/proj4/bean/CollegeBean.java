@@ -1,60 +1,88 @@
 package in.co.rays.proj4.bean;
 
+/**
+ * CollegeBean represents the college entity.
+ * It stores details such as name, address, state, city, and phone number.
+ * This bean is used to transfer college-related data across layers.
+ * 
+ * Author: Rishabh Shrivastava
+ */
 public class CollegeBean extends BaseBean {
 
-	private String name;
-	private String address;
-	private String state;
-	private String city;
-	private String phoneNo;
+    /** College Name */
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    /** College Address */
+    private String address;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /** State of the College */
+    private String state;
 
-	public String getAddress() {
-		return address;
-	}
+    /** City of the College */
+    private String city;
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    /** College Contact Number */
+    private String phoneNo;
 
-	public String getState() {
-		return state;
-	}
+    /** Returns college name */
+    public String getName() {
+        return name;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    /** Sets college name */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    /** Returns address */
+    public String getAddress() {
+        return address;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    /** Sets address */
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public String getPhoneNo() {
-		return phoneNo;
-	}
+    /** Returns state */
+    public String getState() {
+        return state;
+    }
 
-	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
-	}
+    /** Sets state */
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	@Override
-	public String getKey() {
-		return id + "";
-	}
+    /** Returns city */
+    public String getCity() {
+        return city;
+    }
 
-	@Override
-	public String getValue() {
-		return name;
-	}
+    /** Sets city */
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    /** Returns phone number */
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    /** Sets phone number */
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    /** Key used for dropdowns */
+    @Override
+    public String getKey() {
+        return id + "";
+    }
+
+    /** Value shown in dropdowns */
+    @Override
+    public String getValue() {
+        return name;
+    }
 }
