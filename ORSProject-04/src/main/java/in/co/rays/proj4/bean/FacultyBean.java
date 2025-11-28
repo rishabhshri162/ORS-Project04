@@ -1,128 +1,186 @@
-
 package in.co.rays.proj4.bean;
 
 import java.util.Date;
 
+/**
+ * FacultyBean represents the details of a faculty member.
+ * It stores personal information along with college, course,
+ * and subject mapping. This bean is used across Model, Controller,
+ * and View layers in ORSProject-04.
+ *
+ * Author: Rishabh Shrivastava
+ */
 public class FacultyBean extends BaseBean {
 
-	private String firstName;
-	private String lastName;
-	private Date dob;
-	private String gender;
-	private String mobileNo;
-	private String email;
-	private long collegeId;
-	private String collegeName;
-	private long courseId;
-	private String courseName;
-	private long subjectId;
-	private String subjectName;
+    /** Faculty first name */
+    private String firstName;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    /** Faculty last name */
+    private String lastName;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    /** Date of Birth */
+    private Date dob;
 
-	public String getLastName() {
-		return lastName;
-	}
+    /** Gender (Male/Female/Other) */
+    private String gender;
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    /** Mobile Number */
+    private String mobileNo;
 
-	public Date getDob() {
-		return dob;
-	}
+    /** Email ID */
+    private String email;
 
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
+    /** College ID (FK) */
+    private long collegeId;
 
-	public String getGender() {
-		return gender;
-	}
+    /** College Name */
+    private String collegeName;
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+    /** Course ID (FK) */
+    private long courseId;
 
-	public String getMobileNo() {
-		return mobileNo;
-	}
+    /** Course Name */
+    private String courseName;
 
-	public void setMobileNo(String mobileNo) {
-		this.mobileNo = mobileNo;
-	}
+    /** Subject ID (FK) */
+    private long subjectId;
 
-	public String getEmail() {
-		return email;
-	}
+    /** Subject Name */
+    private String subjectName;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /** Returns first name */
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public long getCollegeId() {
-		return collegeId;
-	}
+    /** Sets first name */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setCollegeId(long collegeId) {
-		this.collegeId = collegeId;
-	}
+    /** Returns last name */
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getCollegeName() {
-		return collegeName;
-	}
+    /** Sets last name */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setCollegeName(String collegeName) {
-		this.collegeName = collegeName;
-	}
+    /** Returns Date of Birth */
+    public Date getDob() {
+        return dob;
+    }
 
-	public long getCourseId() {
-		return courseId;
-	}
+    /** Sets Date of Birth */
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
 
-	public void setCourseId(long courseId) {
-		this.courseId = courseId;
-	}
+    /** Returns gender */
+    public String getGender() {
+        return gender;
+    }
 
-	public String getCourseName() {
-		return courseName;
-	}
+    /** Sets gender */
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
+    /** Returns mobile number */
+    public String getMobileNo() {
+        return mobileNo;
+    }
 
-	public long getSubjectId() {
-		return subjectId;
-	}
+    /** Sets mobile number */
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
+    }
 
-	public void setSubjectId(long subjectId) {
-		this.subjectId = subjectId;
-	}
+    /** Returns email address */
+    public String getEmail() {
+        return email;
+    }
 
-	public String getSubjectName() {
-		return subjectName;
-	}
+    /** Sets email address */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setSubjectName(String subjectName) {
-		this.subjectName = subjectName;
-	}
+    /** Returns college ID */
+    public long getCollegeId() {
+        return collegeId;
+    }
 
-	@Override
-	public String getKey() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /** Sets college ID */
+    public void setCollegeId(long collegeId) {
+        this.collegeId = collegeId;
+    }
 
-	@Override
-	public String getValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /** Returns college name */
+    public String getCollegeName() {
+        return collegeName;
+    }
+
+    /** Sets college name */
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
+    }
+
+    /** Returns course ID */
+    public long getCourseId() {
+        return courseId;
+    }
+
+    /** Sets course ID */
+    public void setCourseId(long courseId) {
+        this.courseId = courseId;
+    }
+
+    /** Returns course name */
+    public String getCourseName() {
+        return courseName;
+    }
+
+    /** Sets course name */
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    /** Returns subject ID */
+    public long getSubjectId() {
+        return subjectId;
+    }
+
+    /** Sets subject ID */
+    public void setSubjectId(long subjectId) {
+        this.subjectId = subjectId;
+    }
+
+    /** Returns subject name */
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    /** Sets subject name */
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
+    }
+
+    /**
+     * Returns key for dropdown lists (Primary Key)
+     */
+    @Override
+    public String getKey() {
+        return id + "";
+    }
+
+    /**
+     * Returns value for dropdown lists (Full Name)
+     */
+    @Override
+    public String getValue() {
+        return firstName + " " + lastName;
+    }
 }

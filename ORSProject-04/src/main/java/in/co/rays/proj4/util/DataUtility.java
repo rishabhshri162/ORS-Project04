@@ -14,7 +14,7 @@ import java.util.Date;
  * formatting and parsing operations.
  * </p>
  *
- * @author 
+ * @author Rishabh Shrivastava
  * @version 1.0
  * @since 2025
  */

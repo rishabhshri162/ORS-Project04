@@ -1,4 +1,3 @@
-
 package in.co.rays.proj4.controller;
 
 import java.io.IOException;
@@ -14,6 +13,13 @@ import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.DataValidator;
 import in.co.rays.proj4.util.ServletUtility;
 
+/**
+ * BaseCtl is the abstract parent controller for all controllers. It provides
+ * common constants, validation hooks, preload support, DTO population logic,
+ * and custom service handling.
+ *
+ * Author: Rishabh Shrivastava
+ */
 public abstract class BaseCtl extends HttpServlet {
 
 	public static final String OP_SAVE = "Save";
@@ -32,20 +38,35 @@ public abstract class BaseCtl extends HttpServlet {
 	public static final String OP_LOG_OUT = "Logout";
 
 	public static final String MSG_SUCCESS = "success";
-
 	public static final String MSG_ERROR = "error";
 
+	/**
+	 * Validation hook for child controllers. Override when custom validation is
+	 * required.
+	 */
 	protected boolean validate(HttpServletRequest request) {
 		return true;
 	}
 
+	/**
+	 * Preload hook for dropdowns and reference data. Child controllers override as
+	 * needed.
+	 */
 	protected void preload(HttpServletRequest request) {
 	}
 
+	/**
+	 * Populates the bean from request parameters. Must be implemented in child
+	 * controllers.
+	 */
 	protected BaseBean populateBean(HttpServletRequest request) {
 		return null;
 	}
 
+	/**
+	 * Populates audit fields (createdBy, modifiedBy, timestamps) in the DTO based
+	 * on request and session user.
+	 */
 	protected BaseBean populateDTO(BaseBean dto, HttpServletRequest request) {
 
 		String createdBy = request.getParameter("createdBy");
@@ -79,6 +100,10 @@ public abstract class BaseCtl extends HttpServlet {
 		return dto;
 	}
 
+	/**
+	 * Enhanced service method that: - Calls preload() - Manages validation flow -
+	 * Forwards back to view on validation failure
+	 */
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -100,5 +125,8 @@ public abstract class BaseCtl extends HttpServlet {
 		super.service(request, response);
 	}
 
+	/**
+	 * Returns the JSP view path. Must be implemented by every controller.
+	 */
 	protected abstract String getView();
 }

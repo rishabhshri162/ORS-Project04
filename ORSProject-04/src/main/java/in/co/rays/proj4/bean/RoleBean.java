@@ -1,38 +1,65 @@
 package in.co.rays.proj4.bean;
 
-public class RoleBean extends BaseBean{
-	
-	public static final int ADMIN = 1;
-	public static final int STUDENT = 2;
-	public static final int FACULTY = 3;
-	public static final int KIOSK = 4;
-	
-	
-	private String name;
-	private String description;
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	@Override
-	public String getKey() {
-		return id + "";
-	}
+/**
+ * RoleBean represents different user roles in the system.
+ * It stores role information like name and description.
+ * Common system roles include Admin, Student, Faculty and Kiosk.
+ *
+ * Author: Rishabh Shrivastava
+ */
+public class RoleBean extends BaseBean {
 
-	@Override
-	public String getValue() {
-		return name;
-	}
+    /** System Role: Administrator */
+    public static final int ADMIN = 1;
+
+    /** System Role: Student */
+    public static final int STUDENT = 2;
+
+    /** System Role: Faculty */
+    public static final int FACULTY = 3;
+
+    /** System Role: Kiosk User */
+    public static final int KIOSK = 4;
+
+    /** Name of the Role */
+    private String name;
+
+    /** Description of the Role */
+    private String description;
+
+    /** Returns role name */
+    public String getName() {
+        return name;
+    }
+
+    /** Sets role name */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /** Returns description of role */
+    public String getDescription() {
+        return description;
+    }
+
+    /** Sets description of role */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Returns primary key as dropdown key
+     */
+    @Override
+    public String getKey() {
+        return id + "";
+    }
+
+    /**
+     * Returns role name as dropdown value
+     */
+    @Override
+    public String getValue() {
+        return name;
+    }
 }
-	
-
-

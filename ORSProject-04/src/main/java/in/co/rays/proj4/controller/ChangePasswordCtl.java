@@ -18,11 +18,20 @@ import in.co.rays.proj4.util.DataValidator;
 import in.co.rays.proj4.util.PropertyReader;
 import in.co.rays.proj4.util.ServletUtility;
 
-@WebServlet(name = "ChangePasswordCtl", urlPatterns = { "/ChangePasswordCtl" })
+/**
+ * Controller for changing user passwords.
+ * Handles validation, form population, and updating password using UserModel.
+ *
+ * Author: Rishabh Shrivastava
+ */
+@WebServlet(name = "ChangePasswordCtl", urlPatterns = { "/ctl/ChangePasswordCtl" })
 public class ChangePasswordCtl extends BaseCtl {
 
 	public static final String OP_CHANGE_MY_PROFILE = "Change My Profile";
 
+	/**
+	 * Validates password fields before processing.
+	 */
 	@Override
 	protected boolean validate(HttpServletRequest request) {
 
@@ -67,6 +76,9 @@ public class ChangePasswordCtl extends BaseCtl {
 		return pass;
 	}
 
+	/**
+	 * Populates UserBean with password fields.
+	 */
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 
@@ -80,11 +92,17 @@ public class ChangePasswordCtl extends BaseCtl {
 		return bean;
 	}
 
+	/**
+	 * Displays change password page.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ServletUtility.forward(getView(), request, response);
 	}
 
+	/**
+	 * Handles password update operations.
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -120,6 +138,9 @@ public class ChangePasswordCtl extends BaseCtl {
 		ServletUtility.forward(ORSView.CHANGE_PASSWORD_VIEW, request, response);
 	}
 
+	/**
+	 * Returns the view page for change password.
+	 */
 	@Override
 	protected String getView() {
 		return ORSView.CHANGE_PASSWORD_VIEW;

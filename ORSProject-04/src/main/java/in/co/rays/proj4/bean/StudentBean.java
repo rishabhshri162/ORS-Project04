@@ -2,89 +2,132 @@ package in.co.rays.proj4.bean;
 
 import java.util.Date;
 
+/**
+ * StudentBean represents a student entity in the application.
+ * It contains personal details, college information and audit data
+ * inherited from BaseBean.
+ *
+ * Author: Rishabh Shrivastava
+ */
 public class StudentBean extends BaseBean {
 
-	private String firstName;
-	private String lastName;
-	private Date dob;
-	private String gender;
-	private String mobileNo;
-	private String email;
-	private long collegeId;
-	private String collegeName;
+    /** Student first name */
+    private String firstName;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    /** Student last name */
+    private String lastName;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    /** Date of Birth */
+    private Date dob;
 
-	public String getLastName() {
-		return lastName;
-	}
+    /** Gender (Male/Female/Other) */
+    private String gender;
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    /** Mobile number */
+    private String mobileNo;
 
-	public Date getDob() {
-		return dob;
-	}
+    /** Email ID */
+    private String email;
 
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
+    /** College Primary Key */
+    private long collegeId;
 
-	public String getGender() {
-		return gender;
-	}
+    /** College Name */
+    private String collegeName;
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+    /** Returns first name */
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getMobileNo() {
-		return mobileNo;
-	}
+    /** Sets first name */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setMobileNo(String mobileNo) {
-		this.mobileNo = mobileNo;
-	}
+    /** Returns last name */
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    /** Sets last name */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /** Returns date of birth */
+    public Date getDob() {
+        return dob;
+    }
 
-	public long getCollegeId() {
-		return collegeId;
-	}
+    /** Sets date of birth */
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
 
-	public void setCollegeId(long collegeId) {
-		this.collegeId = collegeId;
-	}
+    /** Returns gender */
+    public String getGender() {
+        return gender;
+    }
 
-	public String getCollegeName() {
-		return collegeName;
-	}
+    /** Sets gender */
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-	public void setCollegeName(String collegeName) {
-		this.collegeName = collegeName;
-	}
+    /** Returns mobile number */
+    public String getMobileNo() {
+        return mobileNo;
+    }
 
-	@Override
-	public String getKey() {
-		return id + "";
-	}
+    /** Sets mobile number */
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
+    }
 
-	@Override
-	public String getValue() {
-		return firstName + " " + lastName;
-	}
+    /** Returns email */
+    public String getEmail() {
+        return email;
+    }
 
+    /** Sets email */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /** Returns college ID (FK) */
+    public long getCollegeId() {
+        return collegeId;
+    }
+
+    /** Sets college ID (FK) */
+    public void setCollegeId(long collegeId) {
+        this.collegeId = collegeId;
+    }
+
+    /** Returns college name */
+    public String getCollegeName() {
+        return collegeName;
+    }
+
+    /** Sets college name */
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
+    }
+
+    /**
+     * Dropdown key = Student ID
+     */
+    @Override
+    public String getKey() {
+        return id + "";
+    }
+
+    /**
+     * Dropdown value = Full name
+     */
+    @Override
+    public String getValue() {
+        return firstName + " " + lastName;
+    }
 }
