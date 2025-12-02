@@ -472,7 +472,7 @@ public class UserModel {
         msg.setMessage(message);
         msg.setMessageType(EmailMessage.HTML_MSG);
 
-//        EmailUtility.sendMail(msg);
+        EmailUtility.sendMail(msg);
 
         return flag;
     }
@@ -510,7 +510,7 @@ public class UserModel {
             msg.setMessage(message);
             msg.setMessageType(EmailMessage.HTML_MSG);
 
-//            EmailUtility.sendMail(msg);
+            EmailUtility.sendMail(msg);
             flag = true;
 
         } catch (Exception e) {
@@ -544,7 +544,7 @@ public class UserModel {
         msg.setMessage(message);
         msg.setMessageType(EmailMessage.HTML_MSG);
 
-//        EmailUtility.sendMail(msg);
+        EmailUtility.sendMail(msg);
 
         return pk;
     }
