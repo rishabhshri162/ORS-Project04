@@ -4,27 +4,26 @@
 .settings/
 .metadata/
 
+# Docker MySQL volume
+mysql-data/
+
 # Build output directories
 /bin/
-/target/
-/out/
+target/
+out/
 
-# Java specific
+# Java compiled files
 *.class
-*.jar
-*.war
-*.ear
 hs_err_pid*
-
-# Logs
 *.log
 *.tmp
 
-# OS files
-.DS_Store
-Thumbs.db
+# Packages
+*.jar
+*.war
+*.ear
 
-# IDE files
+# IDE configs
 .vscode/
 .idea/
 *.iml
@@ -33,28 +32,30 @@ Thumbs.db
 .mvn/
 !.mvn/wrapper/maven-wrapper.jar
 
-# Server generated files (Tomcat)
-/.classpath
-/.project
-/.settings/
+# Tomcat / Server generated files
 **/work/*
-**/.deployment/*
 **/logs/*
+**/.deployment/*
 
 # JSP compiled temp files
 **/org/apache/jsp/*
 **/*.jsp_classes/
 
-# Maven backup
+# Maven metadata backups
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.next
 
-# Ignore local configs
+# System files
+.DS_Store
+Thumbs.db
+
+# Swap / temp
 *.swp
 *.swo
 *.bak
 
-# Java cache
-*.cache
+# Docker env files
+docker-compose.override.yml
+.env
