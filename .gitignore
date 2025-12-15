@@ -3,21 +3,23 @@ mysql-data/
 ORSProject-04/mysql-data/
 *.sock
 
-# Eclipse / IDE
+# Eclipse
 .metadata/
-.settings/
-.classpath
 .project
+.classpath
+.settings/
+
+# Maven / Build
+target/
+*.class
 
 # Tomcat / Server
-**/tmp/
-**/wtpwebapps/
+**/tmp*/
 **/work/
+**/logs/
 
-# Build
-target/
-
-# Logs
-*.log
+# OS
+.DS_Store
+Thumbs.db
 
 
