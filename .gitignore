@@ -3,5 +3,21 @@ mysql-data/
 ORSProject-04/mysql-data/
 *.sock
 
-/target/
+# Eclipse / IDE
+.metadata/
+.settings/
+.classpath
+.project
+
+# Tomcat / Server
+**/tmp/
+**/wtpwebapps/
+**/work/
+
+# Build
+target/
+
+# Logs
+*.log
+
 
