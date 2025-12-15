@@ -2,3 +2,6 @@
 mysql-data/
 ORSProject-04/mysql-data/
 *.sock
+
+/target/
+
