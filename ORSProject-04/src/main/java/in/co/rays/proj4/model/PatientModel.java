@@ -15,6 +15,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import in.co.rays.proj4.bean.PatientBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DatabaseException;
@@ -27,13 +29,15 @@ import in.co.rays.proj4.util.JDBCDataSource;
  */
 public class PatientModel {
 
+    private static Logger log = Logger.getLogger(PatientModel.class);
+
     /**
      * Returns next primary key for Patient table.
-     * 
-     * @return next primary key
-     * @throws DatabaseException
      */
     public static Integer nextPk() throws DatabaseException {
+
+        log.debug("PatientModel nextPk started");
+
         Connection conn = null;
         int pk = 0;
 
@@ -46,7 +50,11 @@ public class PatientModel {
             }
             rs.close();
             pstmt.close();
+
+            log.debug("Next Patient PK = " + (pk + 1));
+
         } catch (Exception e) {
+            log.error("Exception in getting Patient PK", e);
             throw new DatabaseException("Exception in getting PK");
         } finally {
             JDBCDataSource.closeConnection(conn);
@@ -56,18 +64,17 @@ public class PatientModel {
     }
 
     /**
-     * Adds a new Patient record to the database.
-     * 
-     * @param bean PatientBean object
-     * @throws ApplicationException
-     * @throws DuplicateRecordException if patient with same name exists
+     * Adds a new Patient record.
      */
     public void add(PatientBean bean) throws ApplicationException, DuplicateRecordException {
+
+        log.debug("PatientModel add started");
+
         Connection conn = null;
 
-        // Check for duplicate patient name
         PatientBean existing = findByName(bean.getName());
         if (existing != null && existing.getId() != bean.getId()) {
+            log.warn("Duplicate Patient Name: " + bean.getName());
             throw new DuplicateRecordException("Patient Name already exists");
         }
 
@@ -91,12 +98,17 @@ public class PatientModel {
             pstmt.executeUpdate();
             conn.commit();
             pstmt.close();
+
+            log.info("Patient added successfully, ID = " + pk);
+
         } catch (Exception e) {
             try {
                 conn.rollback();
             } catch (Exception ex) {
+                log.error("Add rollback failed", ex);
                 throw new ApplicationException("Add rollback exception: " + ex.getMessage());
             }
+            log.error("Exception in adding Patient", e);
             throw new ApplicationException("Exception in adding Patient");
         } finally {
             JDBCDataSource.closeConnection(conn);
@@ -104,17 +116,17 @@ public class PatientModel {
     }
 
     /**
-     * Updates existing Patient record in the database.
-     * 
-     * @param bean PatientBean object
-     * @throws ApplicationException
-     * @throws DuplicateRecordException if patient with same name exists
+     * Updates existing Patient record.
      */
     public void update(PatientBean bean) throws ApplicationException, DuplicateRecordException {
+
+        log.debug("PatientModel update started, ID = " + bean.getId());
+
         Connection conn = null;
 
         PatientBean existing = findByName(bean.getName());
         if (existing != null && existing.getId() != bean.getId()) {
+            log.warn("Duplicate Patient Name on update: " + bean.getName());
             throw new DuplicateRecordException("Patient Name already exists");
         }
 
@@ -125,6 +137,7 @@ public class PatientModel {
             PreparedStatement pstmt = conn.prepareStatement(
                     "UPDATE st_patient SET name=?, dateofvisit=?, mobileNo=?, disease=?, "
                             + "created_by=?, modified_by=?, created_datetime=?, modified_datetime=? WHERE id=?");
+
             pstmt.setString(1, bean.getName());
             pstmt.setDate(2, new java.sql.Date(bean.getDateOfVisit().getTime()));
             pstmt.setString(3, bean.getMobile());
@@ -138,12 +151,17 @@ public class PatientModel {
             pstmt.executeUpdate();
             conn.commit();
             pstmt.close();
+
+            log.info("Patient updated successfully, ID = " + bean.getId());
+
         } catch (Exception e) {
             try {
                 conn.rollback();
             } catch (Exception ex) {
+                log.error("Update rollback failed", ex);
                 throw new ApplicationException("Update rollback exception: " + ex.getMessage());
             }
+            log.error("Exception in updating Patient", e);
             throw new ApplicationException("Exception in updating Patient");
         } finally {
             JDBCDataSource.closeConnection(conn);
@@ -151,12 +169,12 @@ public class PatientModel {
     }
 
     /**
-     * Deletes a Patient record by ID.
-     * 
-     * @param id Patient ID
-     * @throws ApplicationException
+     * Deletes a Patient by ID.
      */
     public void delete(long id) throws ApplicationException {
+
+        log.debug("PatientModel delete started, ID = " + id);
+
         Connection conn = null;
         try {
             conn = JDBCDataSource.getConnection();
@@ -167,12 +185,17 @@ public class PatientModel {
             pstmt.executeUpdate();
             conn.commit();
             pstmt.close();
+
+            log.info("Patient deleted successfully, ID = " + id);
+
         } catch (Exception e) {
             try {
                 conn.rollback();
             } catch (Exception ex) {
+                log.error("Delete rollback failed", ex);
                 throw new ApplicationException("Delete rollback exception: " + ex.getMessage());
             }
+            log.error("Exception in deleting Patient", e);
             throw new ApplicationException("Exception in deleting Patient");
         } finally {
             JDBCDataSource.closeConnection(conn);
@@ -180,28 +203,30 @@ public class PatientModel {
     }
 
     /**
-     * Finds a Patient by primary key.
-     * 
-     * @param id Patient ID
-     * @return PatientBean
-     * @throws ApplicationException
+     * Finds Patient by primary key.
      */
     public PatientBean findByPk(long id) throws ApplicationException {
+
+        log.debug("PatientModel findByPk started, ID = " + id);
+
         PatientBean bean = null;
         Connection conn = null;
-        String sql = "SELECT * FROM st_patient WHERE id=?";
 
         try {
             conn = JDBCDataSource.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt = conn.prepareStatement(
+                    "SELECT * FROM st_patient WHERE id=?");
             pstmt.setLong(1, id);
+
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 bean = mapResultSetToBean(rs);
             }
             rs.close();
             pstmt.close();
+
         } catch (Exception e) {
+            log.error("Exception in findByPk", e);
             throw new ApplicationException("Exception in getting Patient by PK");
         } finally {
             JDBCDataSource.closeConnection(conn);
@@ -211,28 +236,30 @@ public class PatientModel {
     }
 
     /**
-     * Finds a Patient by name.
-     * 
-     * @param name Patient name
-     * @return PatientBean
-     * @throws ApplicationException
+     * Finds Patient by name.
      */
     public PatientBean findByName(String name) throws ApplicationException {
+
+        log.debug("PatientModel findByName started, Name = " + name);
+
         PatientBean bean = null;
         Connection conn = null;
-        String sql = "SELECT * FROM st_patient WHERE name=?";
 
         try {
             conn = JDBCDataSource.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt = conn.prepareStatement(
+                    "SELECT * FROM st_patient WHERE name=?");
             pstmt.setString(1, name);
+
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 bean = mapResultSetToBean(rs);
             }
             rs.close();
             pstmt.close();
+
         } catch (Exception e) {
+            log.error("Exception in findByName", e);
             throw new ApplicationException("Exception in getting Patient by Name");
         } finally {
             JDBCDataSource.closeConnection(conn);
@@ -242,42 +269,33 @@ public class PatientModel {
     }
 
     /**
-     * Returns a list of all Patient records.
-     * 
-     * @return List of PatientBean
-     * @throws ApplicationException
+     * Returns list of all Patients.
      */
     public List<PatientBean> list() throws ApplicationException {
         return search(null, 0, 0);
     }
 
     /**
-     * Searches Patient records with optional pagination.
-     * 
-     * @param bean     PatientBean for search criteria
-     * @param pageNo   Page number
-     * @param pageSize Number of records per page
-     * @return List of PatientBean
-     * @throws ApplicationException
+     * Searches Patient records.
      */
-    public List<PatientBean> search(PatientBean bean, int pageNo, int pageSize) throws ApplicationException {
+    public List<PatientBean> search(PatientBean bean, int pageNo, int pageSize)
+            throws ApplicationException {
+
+        log.debug("PatientModel search started");
+
         Connection conn = null;
         StringBuilder sql = new StringBuilder("SELECT * FROM st_patient WHERE 1=1 ");
 
         if (bean != null) {
-            if( bean.getId() > 0) {
+            if (bean.getId() > 0)
                 sql.append(" AND id=").append(bean.getId());
-            }
-            if (bean.getName() != null && !bean.getName().isEmpty()) {
+            if (bean.getName() != null && !bean.getName().isEmpty())
                 sql.append(" AND name LIKE '").append(bean.getName()).append("%'");
-            }
-            if (bean.getDateOfVisit() != null) {
+            if (bean.getDateOfVisit() != null)
                 sql.append(" AND date_of_visit LIKE '")
                         .append(new java.sql.Date(bean.getDateOfVisit().getTime())).append("%'");
-            }
-            if (bean.getDisease() != null && !bean.getDisease().isEmpty()) {
+            if (bean.getDisease() != null && !bean.getDisease().isEmpty())
                 sql.append(" AND disease LIKE '").append(bean.getDisease()).append("%'");
-            }
         }
 
         if (pageSize > 0) {
@@ -291,12 +309,16 @@ public class PatientModel {
             conn = JDBCDataSource.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql.toString());
             ResultSet rs = pstmt.executeQuery();
+
             while (rs.next()) {
                 list.add(mapResultSetToBean(rs));
             }
+
             rs.close();
             pstmt.close();
+
         } catch (Exception e) {
+            log.error("Exception in searching Patient", e);
             throw new ApplicationException("Exception in searching Patient");
         } finally {
             JDBCDataSource.closeConnection(conn);
@@ -306,13 +328,10 @@ public class PatientModel {
     }
 
     /**
-     * Maps ResultSet row to PatientBean.
-     * 
-     * @param rs ResultSet
-     * @return PatientBean
-     * @throws Exception
+     * Maps ResultSet to PatientBean.
      */
     private PatientBean mapResultSetToBean(ResultSet rs) throws Exception {
+
         PatientBean bean = new PatientBean();
         bean.setId(rs.getLong(1));
         bean.setName(rs.getString(2));
