@@ -15,6 +15,9 @@ import in.co.rays.proj4.util.JDBCDataSource;
 /**
  * Handles all database operations for College.
  * Supports add, update, delete, search, list, and lookup operations.
+ * 
+ * @author Rishabh Shrivastava
+ * @version 1.0
  */
 public class CollegeModel {
 

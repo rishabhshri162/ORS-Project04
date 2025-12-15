@@ -1,3 +1,4 @@
+
 package in.co.rays.proj4.controller;
 
 import in.co.rays.proj4.controller.ORSView;
@@ -22,9 +23,8 @@ import javax.servlet.http.HttpSession;
  * application without login.
  * 
  * 
- * @author Rishabh
+ * @author Rishabh Shrivastava
  * @version 1.0
- * Copyright (c) Rishabh
  */
 @WebFilter(urlPatterns = { "/doc/*", "/ctl/*" })
 public class FrontController implements Filter {
