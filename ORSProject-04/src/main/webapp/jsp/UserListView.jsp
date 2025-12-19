@@ -115,7 +115,7 @@
 					<td style="text-align: center;"><%=date%></td>
 					<td style="text-align: center; text-transform: capitalize;"><%=roleBean.getName()%></td>
 					<td style="text-align: center;"><a
-						href="<%=ORSView.USER_CTL%>?id=<%=bean.getId()%>"
+						href="<%=ORSView.USER_CTL%>?id=<%=bean.getId()%>"555
 						<%=(user.getId() == bean.getId() || bean.getRoleId() == RoleBean.ADMIN)
 							? "onclick='return false;'"
 							: ""%>>Edit</a>
