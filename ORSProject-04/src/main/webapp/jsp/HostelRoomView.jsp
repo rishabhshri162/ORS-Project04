@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="in.co.rays.proj4.controller.ORSView"%>
 <%@page import="in.co.rays.proj4.controller.HostelRoomCtl"%>
 <%@page import="java.util.HashMap"%>
@@ -22,7 +23,12 @@
 
 		<%
 			HashMap<String, String> statusMap = (HashMap<String, String>) request.getAttribute("statusMap");
+			HashMap<String, String> roomTypeMap = (HashMap<String, String>) request.getAttribute("roomTypeMap");
 		%>
+		<%
+			List roomTypeList = (List) request.getAttribute("roomTypeList");
+		%>
+
 
 		<div align="center">
 			<h1 align="center" style="margin-bottom: -15; color: navy">
@@ -74,9 +80,7 @@
 
 				<tr>
 					<th align="left">Room Type<span style="color: red">*</span></th>
-					<td><input type="text" name="roomType"
-						placeholder="Single / Double / Triple"
-						value="<%=DataUtility.getStringData(bean.getRoomType())%>">
+					<td><%=HTMLUtility.getList("roomType", bean.getRoomType(), roomTypeList)%>
 					</td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("roomType", request)%>
 					</font></td>
@@ -86,7 +90,9 @@
 					<th align="left">Capacity<span style="color: red">*</span></th>
 					<td><input type="text" name="capacity"
 						placeholder="Enter Capacity"
-						value="<%=DataUtility.getStringData(bean.getCapacity())%>">
+						value="<%=DataUtility.getStringData(bean.getCapacity())%>"
+>
+
 					</td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("capacity", request)%>
 					</font></td>
@@ -102,8 +108,7 @@
 
 				<tr>
 					<th align="left">Status<span style="color: red">*</span></th>
-					<td><%=HTMLUtility.getList("status", bean.getStatus(), statusMap)%>
-					</td>
+					<td><%=HTMLUtility.getList("status", bean.getStatus(), statusMap)%></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("status", request)%>
 					</font></td>
 				</tr>
