@@ -12,9 +12,10 @@
 		<%@ include file="Header.jsp"%>
 		<br> <br> <br>
 		<h1 align="center">
-<h1>23-12-2025</h1>
+
 			<font size="10px" color="navy">Welcome to ORS</font>
 		</h1>
+                       <h1>23-12-2025</h1>
 
 		<%
 			UserBean bean = (UserBean) session.getAttribute("user");
